@@ -49,10 +49,6 @@ export default function Entity2Table() {
       accessorKey: "id",
       header: "Id",
     },
-    // {
-    //   accessorKey: "isPassed",
-    //   header: "Is Passed",
-    // },
     {
       accessorKey: "entity1Id",
       header: "Publisher",
@@ -67,7 +63,7 @@ export default function Entity2Table() {
     },
     {
       accessorKey: "number",
-      header: "number",
+      header: "Number",
     },
     {
       id: "actions",
@@ -102,10 +98,6 @@ export default function Entity2Table() {
         );
       },
     },
-    // {
-    //   accessorKey:'note',
-    //   header:"Note"
-    // }
   ];
 
   const { data: interviewOptions } = api.base.getEntity1.useQuery();
@@ -151,6 +143,8 @@ export default function Entity2Table() {
           Remove filter
         </Button>
       </div>
+            {/* <div className="flex-1 overflow-y-auto px-9 py-7 max-h-[70vh]"> */}
+
       <div className="container mx-auto">
         {isLoading && "Loading..."}
         {data && (

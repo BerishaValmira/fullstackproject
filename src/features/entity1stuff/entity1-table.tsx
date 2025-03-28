@@ -52,11 +52,11 @@ export default function Entity1Table() {
       },
       {
         accessorKey: "surname",
-        header: "surname",
+        header: "Surname",
       },
       {
         accessorKey: "birthyear",
-        header: "birthyear",
+        header: "Birthyear",
       },
       // {
       //   accessorKey: "isDeleted",
@@ -134,6 +134,7 @@ export default function Entity1Table() {
           Remove filter
         </Button> */}
       </div>
+      {/* <div className="flex-1 overflow-y-auto px-9 py-7 max-h-[70vh]"> */}
       <div className="container mx-auto">
         {isLoading && "Loading..."}
         {data && (

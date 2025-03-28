@@ -10,7 +10,7 @@ const Entity2Table = dynamic(
 
 export default function Page() {
   return (
-    <div className="-mt-70 -ml-180">
+    <div className="h-screen w-screen -mt-3 -ml-100">
       <Entity2Table />
     </div>
   );

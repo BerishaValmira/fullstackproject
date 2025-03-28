@@ -11,7 +11,7 @@ const SupportTable = dynamic(
 
 export default function Page() {
   return (
-    <div className="-mt-100 -ml-180">
+    <div className="h-screen w-screen -mt-3 -ml-100">
       <SupportContact />
     </div>
   );

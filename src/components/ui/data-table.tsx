@@ -33,6 +33,9 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border">
+      {/* <div className="overflow-y-auto max-h-[70vh] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"> */}
+      <div className="overflow-y-auto max-h-[70vh] scrollbar-thin scrollbar-thumb-transparent scrollbar-track-[#4b5563]">
+
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -75,6 +78,7 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      </div>
     </div>
   )
 }
