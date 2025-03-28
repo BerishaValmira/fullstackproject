@@ -119,7 +119,7 @@ export default function AddEntity1Dialog() {
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
+                        "w-[240px] pl-3 text-center font-normal",
                         !form.getValues("birthyear") && "text-muted-foreground",
                       )}
                       disabled
