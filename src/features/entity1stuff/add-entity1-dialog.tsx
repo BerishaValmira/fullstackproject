@@ -1,7 +1,6 @@
 "use client";
 
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -65,7 +64,7 @@ export default function AddEntity1Dialog() {
 
   return (
     <Form {...form}>
-      <Dialog open={open} onOpenChange={(open: boolean) => setOpen(open)}>
+      <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
         <DialogTrigger asChild>
           <Button>Create Author</Button>
         </DialogTrigger>
@@ -82,7 +81,7 @@ export default function AddEntity1Dialog() {
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                   <FormLabel className="text-sm font-normal">name</FormLabel>
                   <FormControl>
-                    <Input />
+                    <Input {...field} value={field.value ?? ""} />
                     {/* <Checkbox
                       checked={field.value ? field.value : undefined}
                       onCheckedChange={field.onChange}
@@ -99,7 +98,7 @@ export default function AddEntity1Dialog() {
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                   <FormLabel className="text-sm font-normal">surname</FormLabel>
                   <FormControl>
-                    <Input />
+                    <Input {...field} value={field.value ?? ""} />
                     {/* <Checkbox
                       checked={field.value ? field.value : undefined}
                       onCheckedChange={field.onChange}
@@ -118,7 +117,7 @@ export default function AddEntity1Dialog() {
 
                   <FormControl>
                     <Button
-                     
+                      variant={"outline"}
                       className={cn(
                         "w-[240px] pl-3 text-left font-normal",
                         !form.getValues("birthyear") && "text-muted-foreground",
@@ -141,7 +140,7 @@ export default function AddEntity1Dialog() {
                         ? new Date(form.watch("birthyear") as string)
                         : undefined
                     }
-                    onSelect={(date: Date | undefined) => {
+                    onSelect={(date) => {
                       console.log(date?.toString());
                       form.setValue("birthyear", date?.toString());
                     }}

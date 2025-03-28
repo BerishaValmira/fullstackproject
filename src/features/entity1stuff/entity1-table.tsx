@@ -58,19 +58,6 @@ export default function Entity1Table() {
         accessorKey: "birthyear",
         header: "Birthyear",
       },
-      // {
-      //   accessorKey: "isDeleted",
-      //   header: "Is Deleted",
-      // },
-      // {
-      //   accessorKey: "startDate",
-      //   header: "Start Date",
-      //   cell: ({ row }) => {
-      //     const val = row.original.startDate?.toString();
-      //     console.log(val);
-      //     return <div>{val}</div>;
-      //   },
-      // },
       {
         id: "actions",
         cell: ({ row }) => {

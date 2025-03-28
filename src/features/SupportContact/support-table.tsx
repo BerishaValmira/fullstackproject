@@ -62,7 +62,7 @@ export default function SupportContact() {
       header: "Phone",
     },
     {
-      accessorKey: "Department",
+      accessorKey: "department",
       header: "Department",
     },
    
