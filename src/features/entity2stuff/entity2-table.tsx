@@ -145,11 +145,11 @@ export default function Entity2Table() {
       </div>
             {/* <div className="flex-1 overflow-y-auto px-9 py-7 max-h-[70vh]"> */}
 
-      <div className="container mx-auto">
+      <div className="container mx-auto max-h-[70vh]  px-9 py-7">
         {isLoading && "Loading..."}
         {data && (
           // <DataTable columns={columns} data={isSuccess ? filteredData : data} />
-          <DataTable columns={columns} data={isSuccess ? filteredData : data} />
+          <DataTable columns={columns} data={isSuccess ? filteredData : data} />    
         )}
       </div>
     </div>

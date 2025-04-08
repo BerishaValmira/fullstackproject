@@ -8,7 +8,7 @@ export default {
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  // tablesFilter: ["fullstack-t3-tutorial_*"],
+  tablesFilter: ["fullstack-t3-tutorial_*"],
 } satisfies Config;
 
 

@@ -10,7 +10,7 @@ const Entity2Table = dynamic(
 
 export default function Page() {
   return (
-    <div className="h-screen w-screen -mt-3 -ml-100">
+    <div className="-mt-3 -ml-10 overflow-hidden">
       <Entity2Table />
     </div>
   );

@@ -32,10 +32,17 @@ export default function Entity1Table() {
   const { data, isLoading, refetch } = api.base.getEntity1.useQuery(undefined, {
     refetchOnWindowFocus: false,
   });
+  
 
   // const { mutate: remove } = api.base.deleteEntity1.useMutation({
   //   onSuccess: () => refetch(),
   // });
+
+   const { mutate: remove } = api.base.deleteEntity1.useMutation({
+      onSuccess: async () => {
+        await refetch();
+      },
+    });
 
   // const {
   //   mutate,
@@ -73,7 +80,7 @@ export default function Entity1Table() {
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuItem
                   onClick={() => {
-                    // remove(row.original.id);
+                    remove(row.original.id);
                   }}
                 >
                   Delete
@@ -91,7 +98,7 @@ export default function Entity1Table() {
       <div className="flex justify-left w-full p-8 gap-4">
     
         <AddEntity1Dialog />
-     
+{/*      
         {/* <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -116,8 +123,8 @@ export default function Entity1Table() {
               initialFocus
             />
           </PopoverContent>
-        </Popover> */}
-        {/* <Button disabled={!isSuccess} onClick={() => reset()}>
+        </Popover> */} 
+        {/* <Button disabled={isLoading} onClick={() => refetch()}>
           Remove filter
         </Button> */}
       </div>

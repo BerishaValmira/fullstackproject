@@ -11,13 +11,29 @@ import {
   navigationMenuTriggerStyle,
 } from "~/components/ui/navigation-menu"
 import Link from "next/link"
-import { Sidebar, SidebarContent, SidebarHeader, SidebarProvider } from "~/components/ui/sidebar"
+import { Sidebar, SidebarContent, SidebarHeader, SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
+import { signIn, signOut, useSession } from "next-auth/react"
+import { SignInButton } from "./Auth/Sign-in-button"	
+import { Button } from "~/components/ui/button"
 
 export default function NavMenu({ children }: { children: React.ReactNode }) {
+  const { data: session , status} = useSession(); 
+
+  // const handleLogin = async () => {
+  //   await signIn("github", { callbackUrl: "/entity1" });
+  // };
+
+  // const handleLogout = async () => {
+  //   await signOut({ callbackUrl: "/" });
+  // };
+
+  console.log("session", session);
+
     return (
-        <SidebarProvider>
+        <SidebarProvider defaultOpen={true}>
+          <SidebarTrigger  className="fixed top-0 left-1 z-50"/>
         <Sidebar>
-            <SidebarHeader className="text-xl font-bold px-0 py-2"> </SidebarHeader>
+            <SidebarHeader className="text-xl font-bold px-20 py-4"> </SidebarHeader>
             <SidebarContent className="py-4">
             <NavigationMenu className="py-80 px-4">
               <NavigationMenuList >
@@ -44,16 +60,19 @@ export default function NavMenu({ children }: { children: React.ReactNode }) {
                 </Link>
               </NavigationMenuItem>
               </div>
-              <div>
+       
             {/* ///TODO Add the Log out log in authentication*/}
-              <NavigationMenuItem >
-                <Link href="/entityLogOut" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                 Log Out 
-                </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              </div>
+
+              {/* <div className="flex flex-col gap-4 mt-4">
+                {status === "authenticated" ? (
+                  <Button variant="outline" onClick={() => signOut()}>
+                    Sign out
+                  </Button>
+                ) : (
+                  <SignInButton/>
+
+                )}
+              </div> */}
               </NavigationMenuList>
             </NavigationMenu>
             </SidebarContent>

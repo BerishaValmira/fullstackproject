@@ -1,8 +1,10 @@
+import { createUseQueries } from "@trpc/react-query/shared";
 import { eq } from "drizzle-orm";
+import type { get } from "http";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { entity1, entity2, contactSupport, insertContactSupportSchema, insertEntity1Schema, insertEntity2Schema } from "~/server/db/schema";
+import { entity1, entity2, contactSupport, users, insertContactSupportSchema, insertEntity1Schema, insertEntity2Schema } from "~/server/db/schema";
 
 export const baseRouter = createTRPCRouter({
   hello: publicProcedure
@@ -39,6 +41,32 @@ export const baseRouter = createTRPCRouter({
   addEntity1: publicProcedure.input(insertEntity1Schema).mutation(async ({ctx,input})=>{
     return await ctx.db.insert(entity1).values(input)
   }),
+  deleteEntity1: publicProcedure.input(z.number()).mutation(async ({ctx,input})=>{
+    return await ctx.db.delete(entity1).where(eq(entity1.id,input))
+  }
+  ),
+    createUseQueries: publicProcedure.query(async ({ctx})=>{
+    return await ctx.db.select().from(users)
+  }),
+  updateUser:publicProcedure.input(z.object({id:z.number(),name:z.string()})).mutation(async ({ctx,input})=>{
+    return await ctx.db.update(users).set({
+      name:input.name
+    }).where(eq(users.id, input.id!))
+  }),
+  getUser:publicProcedure.query(async ({ctx})=>{
+    return await ctx.db.select().from(users)
+  }),
+  deleteUser:publicProcedure.input(z.number()).mutation(async ({ctx,input})=>{
+    return await ctx.db.delete(users).where(eq(users.id,input))
+  }),
+  updateEntity1: publicProcedure.input(insertEntity1Schema).mutation(async ({ctx,input})=>{
+    return await ctx.db.update(entity1).set({
+      name:input.name,
+      birthyear:input.birthyear,
+      surname:input.surname
+    }).where(eq(entity1.id, input.id!))
+  }
+  ),
   addEntity2: publicProcedure.input(insertEntity2Schema).mutation(async ({ctx,input})=>{
     return await ctx.db.insert(entity2).values(input)
     // .values(input)

@@ -1,14 +1,17 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { sql } from "drizzle-orm";
+import { sql, type ColumnBaseConfig, type ColumnDataType } from "drizzle-orm";
 import {
   boolean,
   date,
+  ExtraConfigColumn,
   index,
   integer,
   pgTableCreator,
+  primaryKey,
   serial,
+  text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -60,10 +63,58 @@ export const contactSupport = createTable("contact_support", {
   department: varchar("department", { length: 256 }),
 });
 
+export const users = createTable("user", {
+  id: serial("id").primaryKey(),      
+  name: varchar("name", { length: 256 }).notNull(),
+  email: varchar("email", { length: 256 }).notNull().unique(),
+  emailVerified: timestamp("email_verified"),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+  updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+  role: varchar("role", { length: 256 }).default("user"),
+  isActive: boolean("is_active").default(true),
+  isDeleted: boolean("is_deleted").default(false),
+  lastLogin: timestamp("last_login"),
+  lastLoginIp: varchar("last_login_ip", { length: 256 }),
+} ); 
+
+
+export const accounts = createTable("account", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  compoundId: varchar("compound_id", { length: 255 }).notNull(),
+  provider: varchar("provider", { length: 255 }).notNull(),
+  providerAccountId: varchar("provider_account_id", { length: 255 })
+    .notNull(),
+  type: varchar("type", { length: 255 }).notNull(),
+  accessToken: varchar("access_token", { length: 255 }),
+  expiresAt: integer("expires_at"),
+  tokenType: varchar("token_type", { length: 255 }),
+  scope: varchar("scope", { length: 255 }),
+  idToken: varchar("id_token", { length: 255 }),
+  sessionState: varchar("session_state", { length: 255 }),
+});
+
+export const sessions = createTable("session", {
+  id: serial("id").primaryKey(),
+  sessionToken: varchar("session_token", { length: 255 }).notNull().unique(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  expires: timestamp("expires").notNull(),
+});
+
 export type Entity1 = typeof entity1.$inferSelect
 export type Entity2 = typeof entity2.$inferSelect
 export type ContactSupport = typeof contactSupport.$inferSelect
+export type User = typeof users.$inferSelect
+export type Account = typeof accounts.$inferSelect
+export type Session = typeof sessions.$inferSelect
 
 export const insertEntity1Schema = createInsertSchema(entity1);
 export const insertEntity2Schema = createInsertSchema(entity2);
 export const insertContactSupportSchema = createInsertSchema(contactSupport);
+export const insertUserSchema = createInsertSchema(users);
+export const insertAccountSchema = createInsertSchema(accounts);
+export const insertSessionSchema = createInsertSchema(sessions);

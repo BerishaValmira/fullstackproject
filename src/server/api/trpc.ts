@@ -7,6 +7,7 @@
  * need to use are documented accordingly near the end.
  */
 import { initTRPC } from "@trpc/server";
+import { type Session } from "next-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
@@ -51,6 +52,11 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
     };
   },
 });
+
+interface CreateContextOptions {
+  session: Session | null;
+}
+
 
 /**
  * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)

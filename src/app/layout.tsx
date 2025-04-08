@@ -4,6 +4,12 @@ import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import NavMenu from "~/features/navigation-menu";
+import { SessionProvider } from "next-auth/react"; // Ensure this is the correct path for your project
+import { sessions } from "~/server/db/schema";
+import { SignInButton } from "~/features/Auth/Sign-in-button";
+import SignUpDialog from "~/features/Auth/AuthDialogUser/user-login";
+
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,18 +24,31 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+    session, 
 }: {
   children: React.ReactNode;
+  session: any; 
 }) {
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider>
-          <div className="flex flex-row px-70 bg-slate-500 items-center w-screen h-screen">
-          <NavMenu children={undefined}/>
-          {children}
-          </div>
+      <SessionProvider session={session}>
+           <TRPCReactProvider>
+            <div className="flex flex-col bg-slate-500  top-0 w-full h-screen overflow-hidden">
+              {/* Check if there is an authenticated session */}
+              {/* {session && session.user ? ( */}
+                <NavMenu>{children}</NavMenu>
+              {/* // ) : ( */}
+                {/* <div className="flex items-center justify-center h-full">
+                  <div className="flex flex-col items-center">
+                  <SignUpDialog/>
+                  <SignInButton />
+                  </div>
+                </div>
+              )} */}
+            </div>
           </TRPCReactProvider>
+          </SessionProvider>
       </body>
     </html>
   );
