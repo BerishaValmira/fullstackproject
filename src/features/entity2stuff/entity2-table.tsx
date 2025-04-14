@@ -5,20 +5,7 @@ import AddEntity2Dialog from "./add-entity2-dialog";
 import { api } from "~/trpc/react";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { Entity2 } from "~/server/db/schema";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover";
 import { Button } from "~/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
-import { FormControl } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import {
   DropdownMenu,
@@ -100,7 +87,6 @@ export default function Entity2Table() {
     },
   ];
 
-  const { data: interviewOptions } = api.base.getEntity1.useQuery();
 
   const {
     mutate,

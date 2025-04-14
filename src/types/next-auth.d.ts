@@ -25,7 +25,7 @@ import {
   accounts,
   sessions,
   users,
-  verificationTokens,
+  // verificationTokens,
 } from "~/server/db/schema";
 
 /**
@@ -71,7 +71,7 @@ export default {
     usersTable: users,
     accountsTable: accounts,
     sessionsTable: sessions,
-    verificationTokensTable: verificationTokens,
+    // verificationTokensTable: verificationTokens,
   }),
   callbacks: {
     session: ({ session, user }) => ({

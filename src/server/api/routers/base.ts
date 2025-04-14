@@ -1,6 +1,4 @@
-import { createUseQueries } from "@trpc/react-query/shared";
 import { eq } from "drizzle-orm";
-import type { get } from "http";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
@@ -26,7 +24,7 @@ export const baseRouter = createTRPCRouter({
   //     });
   //   }),
 
-  getEntity1: publicProcedure.query(async ({ ctx ,input}) => {
+  getEntity1: publicProcedure.query(async ({ ctx }) => {
     return  await ctx.db.select().from(entity1);
   }),
   // filterEntity1:publicProcedure.input(z.object({date:z.string()})).mutation(async ({ctx,input})=>{
@@ -48,14 +46,14 @@ export const baseRouter = createTRPCRouter({
     createUseQueries: publicProcedure.query(async ({ctx})=>{
     return await ctx.db.select().from(users)
   }),
-  updateUser:publicProcedure.input(z.object({id:z.number(),name:z.string()})).mutation(async ({ctx,input})=>{
-    return await ctx.db.update(users).set({
-      name:input.name
-    }).where(eq(users.id, input.id!))
-  }),
-  getUser:publicProcedure.query(async ({ctx})=>{
-    return await ctx.db.select().from(users)
-  }),
+  // updateUser:publicProcedure.input(z.object({id:z.number(),name:z.string()})).mutation(async ({ctx,input})=>{
+  //   return await ctx.db.update(users).set({
+  //     name:input.name
+  //   }).where(eq(users.id, input.id!))
+  // }),
+  // getUser:publicProcedure.query(async ({ctx})=>{
+  //   return await ctx.db.select().from(users)
+  // }),
   deleteUser:publicProcedure.input(z.number()).mutation(async ({ctx,input})=>{
     return await ctx.db.delete(users).where(eq(users.id,input))
   }),

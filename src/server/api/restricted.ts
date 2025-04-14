@@ -4,8 +4,8 @@ import { authOptions } from "~/lib/authOptions"
 
 import type { NextApiRequest, NextApiResponse } from "next"
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getServerSession(authOptions)
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session =  getServerSession(authOptions);
   if (session) {
     res.send({
       content:
@@ -17,3 +17,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   }
 }
+export default handler;

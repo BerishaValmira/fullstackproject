@@ -1,7 +1,7 @@
 "use client";
 
-import { type SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
+import { useForm } from "react-hook-form";
+import {type  z } from "zod";
 import { Button } from "~/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -19,19 +19,12 @@ import { format } from "date-fns";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { Checkbox } from "~/components/ui/checkbox";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover";
 import { cn } from "~/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "~/components/ui/calendar";
@@ -41,7 +34,7 @@ export default function AddEntity1Dialog() {
 
   const { refetch } = api.base.getEntity1.useQuery();
 
-  const { mutate, data, status } = api.base.addEntity1.useMutation({
+  const { mutate} = api.base.addEntity1.useMutation({
     onSuccess: async () => {
       setOpen(false);
       await refetch();
@@ -111,7 +104,7 @@ export default function AddEntity1Dialog() {
             <FormField
               control={form.control}
               name="birthyear"
-              render={({ field }) => (
+              render={({ field: _field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Start Date</FormLabel>
 
@@ -125,7 +118,7 @@ export default function AddEntity1Dialog() {
                       disabled
                     >
                       {form.watch("birthyear") ? (
-                        format(form.watch("birthyear") as string, "PPP")
+                        format(form.watch("birthyear")!, "PPP")
                       ) : (
                         <span>Pick a date</span>
                       )}
@@ -137,7 +130,7 @@ export default function AddEntity1Dialog() {
                     mode="single"
                     selected={
                       form.getValues("birthyear")
-                        ? new Date(form.watch("birthyear") as string)
+                        ? new Date(form.watch("birthyear")!)
                         : undefined
                     }
                     onSelect={(date) => {

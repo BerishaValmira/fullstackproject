@@ -1,11 +1,11 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { use } from "react";
-import { Button } from "~/components/ui/button";
-import { login } from "~/lib/actions/auth";
-import { api } from "~/trpc/server";
+// import { signIn } from "next-auth/react";
+// import { redirect } from "next/navigation";
+// import { use } from "react";
+// import { Button } from "~/components/ui/button";
+// import { login } from "~/lib/actions/auth";
+// import { api } from "~/trpc/server";
 
 export default function Home() {
   return (

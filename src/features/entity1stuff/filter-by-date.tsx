@@ -34,9 +34,10 @@ export default function FilterByDate() {
           mode="single"
           selected={date}
           onSelect={(date: Date | undefined) => {
-            date && setDate(date);
+            if (date) {
+              setDate(date);
+            }
           }}
-          initialFocus
         />
       </PopoverContent>
     </Popover>

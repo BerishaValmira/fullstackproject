@@ -1,8 +1,7 @@
 "use client";
 
 import  {  useForm } from "react-hook-form";
-import { z } from "zod";
-import type {SubmitHandler} from "react-hook-form";
+import type { z } from "zod";
 import { Button } from "~/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -13,37 +12,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
-import { insertEntity1Schema, insertEntity2Schema } from "~/server/db/schema";
+import { insertEntity2Schema } from "~/server/db/schema";
 import { api } from "~/trpc/react";
-import type { Dispatch, SetStateAction, useState } from "react";
-import { format } from "date-fns";
+import type { Dispatch, SetStateAction } from "react";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { Checkbox } from "~/components/ui/checkbox";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover";
-import { cn } from "~/lib/utils";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "~/components/ui/calendar";
-import  type { Matcher } from "react-day-picker";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
+
 
 export default function UpdateEntity2Dialog({
   open,
@@ -56,11 +37,11 @@ export default function UpdateEntity2Dialog({
 }) {
   const { refetch } = api.base.getEntity2.useQuery();
 
-  const { data: interviewOptions } = api.base.getEntity1.useQuery(undefined, {
+ api.base.getEntity1.useQuery(undefined, {
     refetchOnWindowFocus: false,
   });
 
-  const { mutate, data, status } = api.base.updateEntity2.useMutation({
+  const { mutate } = api.base.updateEntity2.useMutation({
     onSuccess: async () => {
       setOpen(false);
       await refetch();

@@ -1,21 +1,16 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { sql, type ColumnBaseConfig, type ColumnDataType } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import {
   boolean,
-  date,
-  ExtraConfigColumn,
-  index,
   integer,
   pgTableCreator,
-  primaryKey,
   serial,
-  text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
-import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { createInsertSchema } from 'drizzle-zod';
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same

@@ -4,21 +4,8 @@ import { DataTable } from "~/components/ui/data-table";
 import AddSupportDialog from "./add-support-dialog";
 import { api } from "~/trpc/react";
 import type { ColumnDef } from "@tanstack/react-table";
-import type { ContactSupport, contactSupport } from "~/server/db/schema";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover";
+import type { ContactSupport } from "~/server/db/schema";
 import { Button } from "~/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
-import { FormControl } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import {
   DropdownMenu,
@@ -101,7 +88,6 @@ export default function SupportContact() {
     },
   ];
 
-  const { data: interviewOptions } = api.base.getSupportContact.useQuery();
 
   const {
     mutate,

@@ -5,29 +5,19 @@ import AddEntity1Dialog from "./add-entity1-dialog";
 import { api } from "~/trpc/react";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { Entity1 } from "~/server/db/schema";
-import FilterByDate from "./filter-by-date";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover";
 import { Button } from "~/components/ui/button";
-import { cn } from "~/lib/utils";
-import { Calendar } from "~/components/ui/calendar";
-import { CalendarIcon, MoreHorizontal } from "lucide-react";
-import { useMemo, useState } from "react";
-import { format } from "date-fns";
+import { MoreHorizontal } from "lucide-react";
+import { useMemo } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 
 export default function Entity1Table() {
-  const [date, setDate] = useState<Date>(new Date(Date.now()));
+  // const [date, setDate] = useState<Date>(new Date(Date.now()));
 
   const { data, isLoading, refetch } = api.base.getEntity1.useQuery(undefined, {
     refetchOnWindowFocus: false,
@@ -91,7 +81,7 @@ export default function Entity1Table() {
         },
       },
     ];
-  }, []);
+  }, [remove]);
 
   return (
     <div className="flex flex-col py-8">

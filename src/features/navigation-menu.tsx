@@ -1,31 +1,19 @@
 'use client'
 
-import { cn } from "~/lib/utils"
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "~/components/ui/navigation-menu"
 import Link from "next/link"
 import { Sidebar, SidebarContent, SidebarHeader, SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
-import { signIn, signOut, useSession } from "next-auth/react"
-import { SignInButton } from "./Auth/Sign-in-button"	
-import { Button } from "~/components/ui/button"
+import {  useSession } from "next-auth/react"
+
 
 export default function NavMenu({ children }: { children: React.ReactNode }) {
-  const { data: session , status} = useSession(); 
-
-  // const handleLogin = async () => {
-  //   await signIn("github", { callbackUrl: "/entity1" });
-  // };
-
-  // const handleLogout = async () => {
-  //   await signOut({ callbackUrl: "/" });
-  // };
+  const { data: session } = useSession(); 
 
   console.log("session", session);
 
